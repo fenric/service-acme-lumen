@@ -45,4 +45,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'last_login_at',
         'last_password_change_at',
     ];
+
+    /**
+     * Gets the user companies
+     *
+     * @return Company[]
+     */
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }

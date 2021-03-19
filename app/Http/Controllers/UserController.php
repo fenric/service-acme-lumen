@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use DateTime;
@@ -153,5 +155,38 @@ class UserController extends Controller
 
         return response()->json([
         ], 200);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function createCompany(Request $request) : JsonResponse
+    {
+        $this->validate($request, [
+            'title'       => 'required|max:128',
+            'phone'       => 'required|max:16',
+            'description' => 'required|max:1024',
+        ]);
+
+        $user = $request->user();
+        $user->companies()->create($request->post());
+
+        return response()->json([
+        ], 201);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function readCompanies(Request $request) : JsonResponse
+    {
+        $user = $request->user();
+        $companies = $user->companies()->get();
+
+        return response()->json($companies, 200);
     }
 }
