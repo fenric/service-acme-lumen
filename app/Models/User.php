@@ -28,9 +28,15 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $fillable = [
         'first_name',
         'last_name',
+        'phone',
         'email',
         'password',
-        'phone',
+        'access_token',
+        'access_token_created_at',
+        'password_recovery_token',
+        'password_recovery_token_created_at',
+        'last_login_at',
+        'last_password_change_at',
     ];
 
     /**
@@ -40,6 +46,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
+        'access_token',
+        'access_token_created_at',
         'password_recovery_token',
         'password_recovery_token_created_at',
         'last_login_at',
