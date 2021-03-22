@@ -9,6 +9,7 @@ jobs:
       - image: circleci/php:7.4-cli-node-browsers
     steps:
       - checkout
+      - run: sudo apt install postgresql
       - run: sudo docker-php-ext-install pdo pdo_pgsql pgsql
       - run: sudo docker-php-ext-enable pdo pdo_pgsql pgsql
       - run: php -v
@@ -19,6 +20,7 @@ jobs:
       - image: circleci/php:8.0-cli-node-browsers
     steps:
       - checkout
+      - run: sudo apt install postgresql
       - run: sudo docker-php-ext-install pdo pdo_pgsql pgsql
       - run: sudo docker-php-ext-enable pdo pdo_pgsql pgsql
       - run: php -v
