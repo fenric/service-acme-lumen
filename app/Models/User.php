@@ -14,12 +14,29 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use Authenticatable, Authorizable, HasFactory;
 
     /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'first_name',
+        'last_name',
+        'phone',
+        'email',
+        'password',
+        'access_token',
+        'access_token_created_at',
+        'password_recovery_token',
+        'password_recovery_token_created_at',
+        'last_login_at',
+        'last_password_change_at',
     ];
 
     /**
@@ -29,5 +46,21 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      */
     protected $hidden = [
         'password',
+        'access_token',
+        'access_token_created_at',
+        'password_recovery_token',
+        'password_recovery_token_created_at',
+        'last_login_at',
+        'last_password_change_at',
     ];
+
+    /**
+     * Gets the user companies
+     *
+     * @return Company[]
+     */
+    public function companies()
+    {
+        return $this->hasMany(Company::class);
+    }
 }
