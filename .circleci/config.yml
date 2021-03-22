@@ -9,8 +9,9 @@ jobs:
       - image: circleci/php:7.4-cli-node-browsers
     steps:
       - checkout
+      - run: sudo pecl install pdo_pgsql
+      - run: sudo docker-php-ext-enable pdo_pgsql
       - run: php -v
-      - run: sudo apt-get install -y php7.4-pgsql
       - run: composer install --no-interaction --prefer-source
       - run: php vendor/bin/phpunit --colors=always
   php80:
@@ -18,8 +19,9 @@ jobs:
       - image: circleci/php:8.0-cli-node-browsers
     steps:
       - checkout
+      - run: sudo pecl install pdo_pgsql
+      - run: sudo docker-php-ext-enable pdo_pgsql
       - run: php -v
-      - run: sudo apt-get install -y php8.0-pgsql
       - run: composer install --no-interaction --prefer-source
       - run: php vendor/bin/phpunit --colors=always
 workflows:
